@@ -1,0 +1,46 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} */
+
+/* a {
+  color: #00b7ff;
+} */
+.section-title {
+  margin: 80px;
+  text-align: center;
+  padding: 7px 109px;
+  margin-bottom: 110px;
+}
+
+.section-title h2 {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.section-title p {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.spad {
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+.spad-bottom {
+  padding-top: 15px;
+  padding-bottom: 50px;
+}
+.aboutim1 {
+  border-radius: 50%;
+  border-radius: 50%;
+  height: 200px;
+  width: 180px;
+}
+.expert-image h2 {
+  margin-top: 18px;
+}
+.my {
+  margin: 10px 77px;
+}

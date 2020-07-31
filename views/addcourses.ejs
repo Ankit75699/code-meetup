@@ -1,0 +1,33 @@
+<% include adminheader %>
+<div class="container  my-4">
+  <section>
+    <form method="post" action="" enctype="multipart/form-data">
+      <h3><%= msg %></h3>
+      <div class="form-group">
+        <label for="exampleInputName1">Course Name</label>
+        <input type="text" name="Course" class="form-control" id="exampleInputName1">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputFaculty1">Faculty Name</label>
+        <input type="text" name="Faculty" class="form-control" id="exampleInputFaculty1">
+      </div>
+
+      <div class="form-group">
+        <label for="file1">Course Image</label>
+        <input type="file" name="imgfile" class="form-control" id="file1">
+      </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea name="Description" class="form-control" id="Description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Creat Account</button>
+      </div>
+
+    </form>
+  </section>
+</div>
+
+<% include footer %>
