@@ -1,0 +1,30 @@
+<% include userheader %>
+<% result.forEach(function(row,index=1) { %>
+<% if (index%2==0) { %>
+<section class="section">
+  <div class="paras">
+    <p class="sectionTag big-text"><%=row.title%></p>
+    <p class="sectionSubTag small-text"><%=row.Article%></p>
+    <small class="small-text"><%=row.date%>&nbsp;AT&nbsp;<%=row.appt%>&nbsp;To&nbsp;<%=row.appt2%></small>
+  </div>
+  <div class="thumbnail">
+    <% if (row.file2){ %>
+    <img src="../images/events/<%=row.file2 %>" alt="Blog image" class="imgFluid">
+    <% } %>
+  </div>
+</section>
+<%} else { %>
+
+<section class="section section-left">
+  <div class="paras">
+    <p class="sectionTag big-text"><%=row.title%></p>
+    <p class="sectionSubTag small-text"><%=row.Article%></p>
+    <small class="small-text"><%=row.date%>&nbsp;AT&nbsp;<%=row.appt%>&nbsp;To&nbsp;<%=row.appt2%></small>
+  </div>
+  <div class="thumbnail">
+    <img src="../images/events/<%=row.file2 %>" alt="Blog image" class="imgFluid">
+  </div>
+</section>
+<% } %>
+
+<% }) %>

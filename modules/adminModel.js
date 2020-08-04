@@ -42,13 +42,47 @@ function adminModel() {
     })
   }
   this.courseupload = (courseDetails) => {
-    console.log("adminmodel courseDetails...........", courseDetails)
     return new Promise((resolve, reject) => {
-      db.collection("courses").insert(courseDetails, (err) => {
-        if (err)
-          reject(err)
-        else
-          resolve({ 'msg': 'Courses inserted successfully' })
+      db.collection("courses").find().toArray((err, data) => {
+        if (data.length == 0)
+          courseDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          courseDetails._id = max_id + 1
+        }
+        db.collection("courses").insert(courseDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve({ 'msg': 'Courses inserted successfully' })
+        })
+      })
+
+    })
+  }
+  this.Addevents = (eventsDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("events").find().toArray((err, data) => {
+        if (data.length == 0)
+          eventsDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          eventsDetails._id = max_id + 1
+        }
+        db.collection("events").insert(eventsDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve({ "msg": "Event Inserted successfully" })
+        })
       })
     })
   }

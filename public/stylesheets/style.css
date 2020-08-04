@@ -6,6 +6,7 @@
 /* a {
   color: #00b7ff;
 } */
+
 .section-title {
   margin: 80px;
   text-align: center;
@@ -43,4 +44,85 @@
 }
 .my {
   margin: 10px 77px;
+}
+
+.card-body:hover {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  background: #d82a4e;
+}
+.card-body:hover h6,
+.card-body:hover p {
+  color: #fff;
+}
+.card-body-1 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+.card-1 {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.card-img-top {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  height: 445px;
+  width: 870px;
+  margin: auto;
+}
+.card-title {
+  margin-bottom: 0.75rem;
+}
+.card-text:last-child {
+  margin-bottom: 0;
+}
+.section {
+  height: 329px;
+  font-family: "Lora", serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 85%;
+  margin: auto;
+}
+.paras {
+  padding: 0px 54px;
+}
+.big-text {
+  font-size: 40px;
+  font-family: "Lora", serif;
+}
+.small-text {
+  font-size: 15px;
+  font-family: "Lora", serif;
+}
+.thumbnail img {
+  margin-top: 21px;
+  width: 250px;
+  border: 2px solid black;
+  border-radius: 18px;
+}
+.section-left {
+  flex-direction: row-reverse;
+}
+small {
+  color: red;
 }
