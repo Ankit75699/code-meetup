@@ -125,7 +125,7 @@ function adminModel() {
           if (err)
             reject(err)
           else
-            resolve({ "msg": "courses_Details Inserted successfully" })
+            resolve(true)
         })
       })
     })

@@ -2,20 +2,23 @@
 
 <div class="containr my-4">
   <%for(row of result) { %>
+  <h1 class="big-text-1"><%- row.mainhead%></h1>
+  <small>Categories: <%- row.courseList%></small>
+  <div class="events-images">
+    <img src="../images/courses_details/<%=row.file5%>" alt="Blog image" height="500px" width="870px">
+  </div>
   <div class="row">
-    <div class="col-md-3">
-      <div class="Date"><%= moment(row.date).format( 'DD') %></div>
-      <div class="month"><%= moment(row.date).format( 'MMMM') %></div>
+    <div class="col-md-9 mid-sec">
+      <h5 class="big-text-1">It’s time to learn React.js</h5>
+      <p class="small-text-1"><%- row.Description%></p>
+      <h5 class="big-text-1">Learning Outcomes</h5>
+      <p class="small-text-1"><%- row.Learning %></p>
+      <h5 class="big-text-1">Requirements</h5>
+      <p class="small-text-1"><%- row.Require %></p>
+      <h5 class="big-text-1">Who this course is for:</h5>
+      <p class="small-text-1"><%- row.who %></p>
     </div>
-    <div class="col-md-6 mid-sec">
-      <h5 class="big-text-1"><%= row.title.html_safe %></h5>
-      <small><i class="fa fa-clock-o"
-          aria-hidden="true"></i>&nbsp;<%= row.appt %>&nbsp;AM&nbsp;-&nbsp;<%= row.appt2 %>&nbsp;PM</small>
-      <p class="small-text-1"><%= row.Article%></p>
-    </div>
-    <div class="col-md-3 events-images">
-      <img src="../images/events/<%=row.file2%>" alt="Blog image" class="imgFluid">
-    </div>
+
   </div>
   <hr>
   <% } %>

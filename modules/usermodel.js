@@ -43,14 +43,14 @@ function userModel() {
       })
     })
   }
-  this.fetchcourse_details = (coursenm) => {
+  this.fetchcourse_details = (courseList) => {
+    console.log("IndexModel courseList..............", courseList)
     return new Promise((resolve, reject) => {
-      db.collection("courses_Details").find({ "coursenm": coursenm }).toArray((err, data) => {
+      db.collection("courses_Details").find({ "courseList": courseList }).toArray((err, data) => {
         if (err)
           reject(err)
         else
           resolve(data)
-        console.log("data.............", data)
       })
     })
   }

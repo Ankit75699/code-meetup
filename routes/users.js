@@ -14,9 +14,9 @@ router.get('/', function (req, res, next) {
   })
 });
 router.get('/course_details', function (req, res, next) {
-  var coursenm = url.parse(req.url, true).query.coursenm
-  console.log("coursenm...................", coursenm)
-  userModel.fetchcourse_details(coursenm).then((result) => {
+  var courseList = url.parse(req.url, true).query.coursenm
+  console.log("courseList...................", courseList)
+  userModel.fetchcourse_details(courseList).then((result) => {
     res.render("viewcourseDetails", { "result": result })
   }).catch((err) => {
     console.log(err)

@@ -1,9 +1,21 @@
 var express = require('express');
 var adminModel = require('../modules/adminModel');
+var userModel = require('../modules/usermodel');
 var url = require("url");
 var path = require("path");
 const { urlencoded } = require('express');
 var router = express.Router();
+
+var courseList
+router.use("/course_Details", (req, res, next) => {
+  userModel.CourseDetails().then((result) => {
+    courseList = result
+    next();
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
 
 /* GET adminhome page. */
 router.get('/', function (req, res, next) {
@@ -81,7 +93,7 @@ router.post('/addcourses', function (req, res, next) {
   })
 });
 router.get('/course_Details', function (req, res, next) {
-  res.render('course_details', { "msg": "" });
+  res.render('course_details', { "msg": "", "courseList": courseList });
 });
 router.post('/course_Details', function (req, res, next) {
   subCoursesDetails = req.body
@@ -92,7 +104,9 @@ router.post('/course_Details', function (req, res, next) {
   subCoursesDetails.file5 = file5nm
   subCoursesDetails.info = Date()
   adminModel.course_Details(subCoursesDetails).then((result) => {
-    res.render('course_details', result);
+    console.log(result)
+    res.render('course_details', { msg: "Sub Cateory added successfully", "courseList": courseList });
+
   }).catch((err) => {
     console.log(err)
   })
