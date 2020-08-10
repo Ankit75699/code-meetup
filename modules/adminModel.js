@@ -41,20 +41,20 @@ function adminModel() {
       }
     })
   }
-  this.courseupload = (courseDetails) => {
+  this.courseupload = (addcourseDetails) => {
     return new Promise((resolve, reject) => {
       db.collection("courses").find().toArray((err, data) => {
         if (data.length == 0)
-          courseDetails._id = 1
+          addcourseDetails._id = 1
         else {
           max_id = data[0]._id
           for (row of data) {
             if (max_id < row._id)
               max_id = row._id
           }
-          courseDetails._id = max_id + 1
+          addcourseDetails._id = max_id + 1
         }
-        db.collection("courses").insert(courseDetails, (err) => {
+        db.collection("courses").insert(addcourseDetails, (err) => {
           if (err)
             reject(err)
           else
@@ -86,5 +86,50 @@ function adminModel() {
       })
     })
   }
+  this.Addblog = (blogDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("blogs").find().toArray((err, data) => {
+        if (data.length == 0)
+          blogDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          blogDetails._id = max_id + 1
+        }
+        db.collection("blogs").insert(blogDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve({ "msg": "Blogs Inserted successfully" })
+        })
+      })
+    })
+  }
+  this.course_Details = (subCoursesDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("courses_Details").find().toArray((err, data) => {
+        if (data.length == 0)
+          subCoursesDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          subCoursesDetails._id = max_id + 1
+        }
+        db.collection("courses_Details").insert(subCoursesDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve({ "msg": "courses_Details Inserted successfully" })
+        })
+      })
+    })
+  }
+
 }
 module.exports = new adminModel()

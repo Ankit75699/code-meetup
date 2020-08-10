@@ -9,6 +9,23 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
   res.render('adminhome', { "msg": "" });
 });
+router.get('/blog', function (req, res, next) {
+  res.render('addblog', { "msg": "" });
+});
+router.post('/blog', function (req, res, next) {
+  blogDetails = req.body
+  var file3 = req.files.file3;
+  var file3nm = Date.now() + "-" + file3.name;
+  var file3path = path.join(__dirname, "../public/images/blog", file3nm);
+  file3.mv(file3path);
+  blogDetails.file3 = file3nm
+  blogDetails.info = Date()
+  adminModel.Addblog(blogDetails).then((result) => {
+    res.render('addblog', result);
+  }).catch((err) => {
+    console.log(err)
+  })
+});
 router.get('/addimages', function (req, res, next) {
   res.render('addimages', { "msg": "" });
 });
@@ -50,21 +67,38 @@ router.get('/addcourses', function (req, res, next) {
   res.render('addcourses', { "msg": "" });
 });
 router.post('/addcourses', function (req, res, next) {
-  courseDetails = req.body
+  addcourseDetails = req.body
   var file1 = req.files.file1;
   var file1nm = Date.now() + "-" + file1.name;
   var file1path = path.join(__dirname, "../public/images/courses", file1nm);
   file1.mv(file1path);
   courseDetails.file1 = file1nm
   courseDetails.info = Date()
-  adminModel.courseupload(courseDetails).then((result) => {
+  adminModel.courseupload(addcourseDetails).then((result) => {
     res.render('addcourses', result);
   }).catch((err) => {
     console.log(err)
   })
 });
+router.get('/course_Details', function (req, res, next) {
+  res.render('course_details', { "msg": "" });
+});
+router.post('/course_Details', function (req, res, next) {
+  subCoursesDetails = req.body
+  var file5 = req.files.file5;
+  var file5nm = Date.now() + "-" + file5.name;
+  var file5path = path.join(__dirname, "../public/images/courses_details", file5nm);
+  file5.mv(file5path);
+  subCoursesDetails.file5 = file5nm
+  subCoursesDetails.info = Date()
+  adminModel.course_Details(subCoursesDetails).then((result) => {
+    res.render('course_details', result);
+  }).catch((err) => {
+    console.log(err)
+  })
+});
 router.get('/setting', function (req, res, next) {
-  res.render('setting', { "msg": "" });
+  res.render('setting',);
 });
 router.get('/logout', function (req, res, next) {
   res.redirect('/login')

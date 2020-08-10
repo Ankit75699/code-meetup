@@ -7,15 +7,17 @@
         <%for(let row of result) { %>
         <div class="col mb-4">
           <div class="card">
-            <% if (row.file1){ %>
-            <img src="../images/courses/<%=row.file1 %>" class="bd-placeholder-img card-img-top" width="100%"
-              height="180" />
-            <% } %>
-            <div class="card-body" id="hover12">
-              <h6 class="card-title"><%= row.coursenm %></h6>
-              <p class="card-title"><%= row.facultynm%></p>
-              <p class="card-text"><%= row.text %></p>
-            </div>
+            <a href="course_details?subject=<%= row.coursenm %>">
+              <% if (row.file1){ %>
+              <img src="../images/courses/<%=row.file1 %>" class="bd-placeholder-img card-img-top" width="100%"
+                height="180" />
+              <% } %>
+              <div class="card-body" id="hover12">
+                <h6 class="card-title"><%= row.coursenm %></h6>
+                <p class="card-title"><%= row.facultynm%></p>
+                <p class="card-text"><%= row.text %></p>
+              </div>
+            </a>
           </div>
         </div>
         <% } %>

@@ -1,0 +1,23 @@
+<% include userheader %>
+
+<div class="containr my-4">
+  <%for(row of result) { %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="Date"><%= moment(row.date).format( 'DD') %></div>
+      <div class="month"><%= moment(row.date).format( 'MMMM') %></div>
+    </div>
+    <div class="col-md-6 mid-sec">
+      <h5 class="big-text-1"><%= row.title.html_safe %></h5>
+      <small><i class="fa fa-clock-o"
+          aria-hidden="true"></i>&nbsp;<%= row.appt %>&nbsp;AM&nbsp;-&nbsp;<%= row.appt2 %>&nbsp;PM</small>
+      <p class="small-text-1"><%= row.Article%></p>
+    </div>
+    <div class="col-md-3 events-images">
+      <img src="../images/events/<%=row.file2%>" alt="Blog image" class="imgFluid">
+    </div>
+  </div>
+  <hr>
+  <% } %>
+</div>
+<% include footer%>

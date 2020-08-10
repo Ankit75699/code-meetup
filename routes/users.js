@@ -1,25 +1,46 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
+var url = require("url");
+var path = require("path");
 var userModel = require('../modules/usermodel');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.render("userhome")
+  userModel.fetchBlog().then((result) => {
+    res.render("userhome", { "result": result })
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/course_details', function (req, res, next) {
+  var coursenm = url.parse(req.url, true).query.coursenm
+  console.log("coursenm...................", coursenm)
+  userModel.fetchcourse_details(coursenm).then((result) => {
+    res.render("viewcourseDetails", { "result": result })
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/user_galary', function (req, res, next) {
+  res.render("user_galary")
 });
 router.get('/usercourses', function (req, res, next) {
   userModel.CourseDetails().then((result) => {
-    res.render("usercourses", { "result": result })
+    res.render("usercourses", { "result": result, })
   }).catch((err) => {
     console.log(err)
   })
 });
 router.get('/user_events', function (req, res, next) {
   userModel.fetchEvents().then((result) => {
-    console.log("result.......", result)
-    res.render("user_events", { "result": result })
+    res.render("user_events", { "result": result, moment: moment })
   }).catch((err) => {
     console.log(err)
   })
+});
+router.get('/user_setting', function (req, res, next) {
+  res.render("userSetting")
 });
 
 router.get('/logout', function (req, res, next) {

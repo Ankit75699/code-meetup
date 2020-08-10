@@ -84,7 +84,7 @@
 .card-img-top {
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px);
-  height: 445px;
+  height: 266px;
   width: 870px;
   margin: auto;
 }
@@ -124,5 +124,70 @@
   flex-direction: row-reverse;
 }
 small {
-  color: red;
+  color: #999;
+}
+.card-img-top-1 {
+  height: 227px;
+  width: 378px;
+}
+.row {
+  margin-top: 83px;
+  margin-bottom: 6%;
+}
+.events-images img {
+  height: 110px;
+  width: 220px;
+  margin-top: 40px;
+}
+.Date {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 73px;
+  margin-top: 9px;
+  color: #ffb606;
+  /* padding-left: 66px; */
+  text-align: center;
+}
+.month {
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 73px;
+  margin-top: 9px;
+  color: #ffb606;
+  /* padding-left: 66px; */
+  text-align: center;
+}
+.mid-sec {
+  float: left;
+  width: calc(100% - 450px);
+  width: -webkit-calc(100% - 450px);
+  width: -moz-calc(100% - 450px);
+  padding: 0 117px;
+  position: relative;
+}
+.big-text-1 {
+  font-size: 30px;
+  font-family: "Lora", serif;
+  color: black;
+}
+.small-text-1 {
+  font-size: 15px;
+  font-family: "Lora", serif;
+  margin-top: 8px;
+}
+
+.nav-tabs-e .nav-link-e {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-top: 5px solid #ffb606;
+  background: #f9f9f9;
+  padding: 10px 88px;
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+
+  border-bottom: 0 !important;
+  border-radius: 0;
+  margin-right: 3px;
 }
