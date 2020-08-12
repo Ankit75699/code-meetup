@@ -5,6 +5,17 @@ var url = require("url");
 var path = require("path");
 var userModel = require('../modules/usermodel');
 
+var subcourseList
+router.use("/course_details", (req, res, next) => {
+  userModel.fetchsubcourse_details().then((result) => {
+    subcourseList = result
+    console.log("subcourseList..............,,,,", subcourseList)
+    next();
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   userModel.fetchBlog().then((result) => {
@@ -15,9 +26,8 @@ router.get('/', function (req, res, next) {
 });
 router.get('/course_details', function (req, res, next) {
   var courseList = url.parse(req.url, true).query.coursenm
-  console.log("courseList...................", courseList)
   userModel.fetchcourse_details(courseList).then((result) => {
-    res.render("viewcourseDetails", { "result": result })
+    res.render("viewcourseDetails", { "result": result, "subcourseList": subcourseList })
   }).catch((err) => {
     console.log(err)
   })

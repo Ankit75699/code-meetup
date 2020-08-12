@@ -15,7 +15,14 @@ router.use("/course_Details", (req, res, next) => {
     console.log(err)
   })
 })
-
+router.use("/add_index", (req, res, next) => {
+  userModel.CourseDetails().then((result) => {
+    courseList = result
+    next();
+  }).catch((err) => {
+    console.log(err)
+  })
+})
 
 /* GET adminhome page. */
 router.get('/', function (req, res, next) {
@@ -107,6 +114,18 @@ router.post('/course_Details', function (req, res, next) {
     console.log(result)
     res.render('course_details', { msg: "Sub Cateory added successfully", "courseList": courseList });
 
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/add_index', function (req, res, next) {
+  res.render('addIndex', { "msg": "", "courseList": courseList });
+});
+router.post('/add_index', function (req, res, next) {
+  indexDetails = req.body
+  indexDetails.info = Date()
+  adminModel.AddIndex(indexDetails).then((result) => {
+    res.render('addIndex', { msg: "Index added successfully", "courseList": courseList });
   }).catch((err) => {
     console.log(err)
   })

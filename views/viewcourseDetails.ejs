@@ -1,26 +1,135 @@
 <% include userheader %>
 
-<div class="containr my-4">
+<div class="containr my-4 view-container">
   <%for(row of result) { %>
-  <h1 class="big-text-1"><%- row.mainhead%></h1>
+  <h1 class="view-big-text"><%- row.mainhead%></h1>
   <small>Categories: <%- row.courseList%></small>
-  <div class="events-images">
+  <div class="viewDetails-images">
     <img src="../images/courses_details/<%=row.file5%>" alt="Blog image" height="500px" width="870px">
   </div>
+  <% } %>
   <div class="row">
     <div class="col-md-9 mid-sec">
-      <h5 class="big-text-1">It’s time to learn React.js</h5>
-      <p class="small-text-1"><%- row.Description%></p>
-      <h5 class="big-text-1">Learning Outcomes</h5>
-      <p class="small-text-1"><%- row.Learning %></p>
-      <h5 class="big-text-1">Requirements</h5>
-      <p class="small-text-1"><%- row.Require %></p>
-      <h5 class="big-text-1">Who this course is for:</h5>
-      <p class="small-text-1"><%- row.who %></p>
-    </div>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item view-nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+            aria-controls="nav-home" aria-selected="true"><i class="fa fa-bookmark"></i> Overview</a>
+          <a class="nav-item view-nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+            aria-controls="nav-profile" aria-selected="false"><i class="fa fa-cube"></i> Curriculum</a>
+          <a class="nav-item view-nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-instructor" role="tab"
+            aria-controls="nav-contact" aria-selected="false"><i class="fa fa-user"></i> Insturctor</a>
+          <a class="nav-item view-nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-Review" role="tab"
+            aria-controls="nav-contact" aria-selected="false"><i class="fa fa-comments"></i> Rewiew</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <%for(row of result) { %>
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <h5 class="view-big-text my-4">It’s time to learn React.js</h5>
+          <p class="view-small-text"><%- row.Description%></p>
+          <h5 class="view-big-text">Learning Outcomes</h5>
+          <p class="view-small-text"><%- row.Learning %></p>
+          <h5 class="view-big-text">Requirements</h5>
+          <p class="view-small-text"><%- row.Require %></p>
+          <h5 class="view-big-text">Who this course is for:</h5>
+          <p class="view-small-text"><%- row.who %></p>
+        </div>
+        <% } %>
+        <% for(let row of subcourseList) { %>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="wrapper center-block">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading active" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                      <%- row.subCourse %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
 
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                      href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Collapsible Group Item #2
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                      href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Collapsible Group Item #3
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                    labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+        <div class="tab-pane fade" id="nav-instructor" role="tabpanel" aria-labelledby="nav-contact-tab">hello
+          Instructor
+        </div>
+        <div class="tab-pane fade" id="nav-Review" role="tabpanel" aria-labelledby="nav-contact-tab">hello Review
+        </div>
+      </div>
+    </div>
   </div>
-  <hr>
-  <% } %>
+
+
 </div>
+<script src=" https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" language="javascript">
+  $('#myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+</script>
+<script type="text/javascript" language="javascript">
+  $('.panel-collapse').on('show.bs.collapse', function () {
+    $(this).siblings('.panel-heading').addClass('active');
+  });
+
+  $('.panel-collapse').on('hide.bs.collapse', function () {
+    $(this).siblings('.panel-heading').removeClass('active');
+  });
+</script>
 <% include footer%>

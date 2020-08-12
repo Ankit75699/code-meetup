@@ -130,6 +130,27 @@ function adminModel() {
       })
     })
   }
-
+  this.AddIndex = (indexDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("add_index").find().toArray((err, data) => {
+        if (data.length == 0)
+          indexDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          indexDetails._id = max_id + 1
+        }
+        db.collection("add_index").insert(indexDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve(true)
+        })
+      })
+    })
+  }
 }
 module.exports = new adminModel()
