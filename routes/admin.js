@@ -6,6 +6,15 @@ var path = require("path");
 const { urlencoded } = require('express');
 var router = express.Router();
 
+/* Middleware to check user authentication */
+router.use((req, res, next) => {
+  if (req.session.sunm == undefined || req.session.srole != "admin") {
+    req.session.destroy();
+    res.redirect("/logout")
+  }
+  next()
+})
+
 var courseList
 router.use("/course_Details", (req, res, next) => {
   userModel.CourseDetails().then((result) => {
@@ -26,10 +35,10 @@ router.use("/add_index", (req, res, next) => {
 
 /* GET adminhome page. */
 router.get('/', function (req, res, next) {
-  res.render('adminhome', { "msg": "" });
+  res.render('adminhome', { "msg": "", "sunm": req.session.sunm });
 });
 router.get('/blog', function (req, res, next) {
-  res.render('addblog', { "msg": "" });
+  res.render('addblog', { "msg": "", "sunm": req.session.sunm });
 });
 router.post('/blog', function (req, res, next) {
   blogDetails = req.body
@@ -40,16 +49,16 @@ router.post('/blog', function (req, res, next) {
   blogDetails.file3 = file3nm
   blogDetails.info = Date()
   adminModel.Addblog(blogDetails).then((result) => {
-    res.render('addblog', result);
+    res.render('addblog', { "msg": "Blogs Inserted successfully", "sunm": req.session.sunm });
   }).catch((err) => {
     console.log(err)
   })
 });
 router.get('/addimages', function (req, res, next) {
-  res.render('addimages', { "msg": "" });
+  res.render('addimages', { "msg": "", "sunm": req.session.sunm });
 });
 router.get('/addevents', function (req, res, next) {
-  res.render('addevents', { "msg": "" });
+  res.render('addevents', { "msg": "", "sunm": req.session.sunm });
 });
 router.post('/addevents', function (req, res, next) {
   eventsDetails = req.body
@@ -68,7 +77,7 @@ router.post('/addevents', function (req, res, next) {
 
 router.get('/manageuser', function (req, res, next) {
   adminModel.fetchAll().then((result) => {
-    res.render('manageuser', { result: result });
+    res.render('manageuser', { result: result, "sunm": req.session.sunm });
   }).catch((err) => {
     console.log(err)
   })
@@ -83,7 +92,7 @@ router.get('/manageuserstatus', function (req, res, next) {
 });
 
 router.get('/addcourses', function (req, res, next) {
-  res.render('addcourses', { "msg": "" });
+  res.render('addcourses', { "msg": "", "sunm": req.session.sunm });
 });
 router.post('/addcourses', function (req, res, next) {
   addcourseDetails = req.body
@@ -100,7 +109,7 @@ router.post('/addcourses', function (req, res, next) {
   })
 });
 router.get('/course_Details', function (req, res, next) {
-  res.render('course_details', { "msg": "", "courseList": courseList });
+  res.render('course_details', { "msg": "", "courseList": courseList, "sunm": req.session.sunm });
 });
 router.post('/course_Details', function (req, res, next) {
   subCoursesDetails = req.body
@@ -112,28 +121,36 @@ router.post('/course_Details', function (req, res, next) {
   subCoursesDetails.info = Date()
   adminModel.course_Details(subCoursesDetails).then((result) => {
     console.log(result)
-    res.render('course_details', { msg: "Sub Cateory added successfully", "courseList": courseList });
+    res.render('course_details', { msg: "Sub Cateory added successfully", "courseList": courseList, "sunm": req.session.sunm });
 
   }).catch((err) => {
     console.log(err)
   })
 });
 router.get('/add_index', function (req, res, next) {
-  res.render('addIndex', { "msg": "", "courseList": courseList });
+  res.render('addIndex', { "msg": "", "courseList": courseList, "sunm": req.session.sunm });
 });
 router.post('/add_index', function (req, res, next) {
   indexDetails = req.body
   indexDetails.info = Date()
   adminModel.AddIndex(indexDetails).then((result) => {
-    res.render('addIndex', { msg: "Index added successfully", "courseList": courseList });
+    res.render('addIndex', { msg: "Index added successfully", "courseList": courseList, "sunm": req.session.sunm });
   }).catch((err) => {
     console.log(err)
   })
 });
 router.get('/setting', function (req, res, next) {
-  res.render('setting',);
+  res.render('setting', { "sunm": req.session.sunm, 'msg': "" });
+});
+router.post('/setting', function (req, res, next) {
+  userModel.chngPassword(req.session.email, req.body).then((result) => {
+    res.render("setting", { "sunm": req.session.sunm, 'msg': result.msg })
+  }).catch((err) => {
+    console.log(err)
+  })
 });
 router.get('/logout', function (req, res, next) {
-  res.redirect('/login')
+  req.session.destroy()
+  res.redirect("/login")
 });
 module.exports = router;

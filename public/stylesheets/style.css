@@ -213,7 +213,7 @@ small {
 }
 .view-nav-link {
   display: block;
-  padding: 1rem 4rem;
+  padding: 1rem 78px;
 }
 
 .nav-tabs .nav-item {
@@ -266,4 +266,8 @@ small {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+.accordion {
+  margin: 20px 0px;
 }

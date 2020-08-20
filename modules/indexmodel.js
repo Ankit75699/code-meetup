@@ -3,7 +3,7 @@ const { collection, getMaxListeners } = require('./connection')
 function indexModel() {
   this.registration = (userDetails) => {
     return new Promise((resolve, reject) => {
-      db.collection("register").find().toArray((err, data) => {
+      db.collection("register").find({}).toArray((err, data) => {
         if (data.length == 0)
           userDetails._id = 1
         else {
@@ -16,6 +16,7 @@ function indexModel() {
         }
         userDetails.status = 0
         userDetails.role = "user"
+
         userDetails.info = Date()
         var userstatus = 0
         if (data.length != 0) {
@@ -37,6 +38,18 @@ function indexModel() {
       })
     })
   }
+
+  this.verifyuser = (emailid) => {
+    return new Promise((resolve, reject) => {
+      db.collection("register").update({ 'email': emailid }, { $set: { 'status': 1 } }, (err) => {
+        if (err)
+          reject(err)
+        else
+          resolve(true)
+      })
+    })
+  }
+
   this.login = (userDetails) => {
     return new Promise((resolve, reject) => {
       db.collection("register").find({ 'email': userDetails.email, 'password': userDetails.password, 'status': 1 }).toArray((err, data) => {

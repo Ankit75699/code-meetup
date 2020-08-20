@@ -1,6 +1,19 @@
 var express = require('express');
 var indexModel = require('../modules/indexmodel')
+const url = require('url');
+const sendMail = require('./mailapi')
+const sendSMS = require('./smsapi')
 var router = express.Router();
+
+cunm = "";
+cpass = "";
+router.use("/login", (req, res, next) => {
+  if (req.cookies.cunm != undefined) {
+    cunm = req.cookies.cunm;
+    cpass = req.cookies.cpass;
+  }
+  next();
+});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -11,19 +24,42 @@ router.get('/register', function (req, res, next) {
 });
 router.post('/register', function (req, res, next) {
   indexModel.registration(req.body).then((result) => {
+    sendMail(req.body.email, req.body.password)
+    sendSMS(req.body.mobile)
     res.render('register', result);
   }).catch((err) => {
     console.log(err)
   })
 });
+
+router.get('/verifyuser', function (req, res, next) {
+  var emailid = url.parse(req.url, true).query.emailid
+  indexModel.verifyuser(emailid).then((result) => {
+    res.redirect('/login')
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+
 router.get('/login', function (req, res, next) {
-  res.render('login', { "msg": "" });
+  res.render('login', { "msg": "", 'cunm': cunm, 'cpass': cpass });
 });
 router.post('/login', function (req, res, next) {
   indexModel.login(req.body).then((result) => {
     if (result.length == 0)
-      res.render('login', { 'msg': 'Invalid user please login again or verify account....' });
+      res.render('login', { 'msg': 'Invalid user please login again or verify account....', 'cunm': cunm, 'cpass': cpass });
     else {
+      req.session.sunm = result[0].name
+      req.session.email = result[0].email
+      req.session.srole = result[0].role
+      if (req.body.chk != undefined) {
+        res.cookie("cunm", result[0].email, {
+          expires: new Date(Date.now() + 900000),
+        });
+        res.cookie("cpass", result[0].password, {
+          expires: new Date(Date.now() + 900000),
+        });
+      }
       if (result[0].role == "admin")
         res.redirect("/admin")
       else
@@ -44,4 +80,8 @@ router.get('/courses', function (req, res, next) {
 router.get('/contact', function (req, res, next) {
   res.render('contact');
 });
-module.exports = router;
+router.get('/logout', function (req, res, next) {
+  req.session.destroy()
+  res.redirect("/login")
+});
+module.exports = router; 

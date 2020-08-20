@@ -103,7 +103,7 @@ function adminModel() {
           if (err)
             reject(err)
           else
-            resolve({ "msg": "Blogs Inserted successfully" })
+            resolve(true)
         })
       })
     })
@@ -152,5 +152,6 @@ function adminModel() {
       })
     })
   }
+
 }
 module.exports = new adminModel()

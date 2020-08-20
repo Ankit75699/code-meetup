@@ -35,71 +35,66 @@
           <p class="view-small-text"><%- row.who %></p>
         </div>
         <% } %>
-        <% for(let row of subcourseList) { %>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div class="wrapper center-block">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading active" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                      aria-expanded="true" aria-controls="collapseOne">
-                      <%- row.subCourse %>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
 
-                  </div>
-                </div>
+          <div class="accordion" id="accordionExample">
+            <% subcourseList.forEach((row,index)=> { %>
+            <p> </p>
+            <div class="card mb-2">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse"
+                    data-target="#collapseOne_<%=index%>" aria-expanded="true" aria-controls="collapseOne">
+                    <%- row.subCourse %>
+
+                  </button>
+                </h2>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                      href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Collapsible Group Item #2
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                    labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                      href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Collapsible Group Item #3
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                    labore sustainable VHS.
-                  </div>
+
+              <div id="collapseOne_<%=index%>" class="collapse" aria-labelledby="headingOne"
+                data-parent="#accordionExample">
+                <div class="card-body">
+                  <%- row.Description %>
+                  <%if(row.cstatus) { %>
+                  <a class="btn btn-primary disabled " href="<%= row.Link %>">Subscribe first to get a fullcourse</a>
+                  <% } else { %>
+                  <a class="btn btn-primary " href="<%= row.Link %>">View Courses</a>
+                  <% } %>
                 </div>
               </div>
             </div>
+            <% }) %>
           </div>
+
+          <!-- PayPal payment form for displaying the buy button -->
+          <form action="<%= PAYPAL_URL %>" method="post">
+            <!-- Identify your business so that you can collect the payments. -->
+            <input type="hidden" name="business" value="<%= PAYPAL_ID %>">
+
+            <!-- Specify a Buy Now button. -->
+            <input type="hidden" name="cmd" value="_xclick">
+
+            <!-- Specify details about the item that buyers will purchase. -->
+            <input type="hidden" name="item_name" value="Verify Location Charges">
+            <input type="hidden" name="item_number" value="<%=courseList%>">
+            <input type="hidden" name="amount" value="50">
+            <input type="hidden" name="currency_code" value="USD">
+
+            <!-- Specify URLs -->
+            <input type="hidden" name="return"
+              value="http://localhost:3000/user/payment?coursename=<%=courseList%>&sunm=<%= sunm %>&price=50"">
+            <input type=" hidden" name="cancel_return" value="http://localhost:3000/user/cancel/">
+
+            <!-- Display the payment button. -->
+            <input type="image" name="submit" border="0" style="float: right;"
+              src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
+          </form>
+          <form action="/change_course_status" id="hiddenform">
+            <input type="hidden" name="course_id" id="" value="<>">
+            <input type="hidden" name="user_id" id="">
+            <input type="hidden" name="payment_status" id="">
+          </form>
         </div>
-        <% } %>
         <div class="tab-pane fade" id="nav-instructor" role="tabpanel" aria-labelledby="nav-contact-tab">hello
           Instructor
         </div>

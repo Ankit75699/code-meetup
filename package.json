@@ -11,10 +11,13 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-fileupload": "^1.1.9",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "moment": "^2.27.0",
     "mongoose": "^5.9.26",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.4"
+    "nodemailer": "^6.4.11",
+    "nodemon": "^2.0.4",
+    "unirest": "^0.6.0"
   }
 }
