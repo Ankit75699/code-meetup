@@ -7,7 +7,8 @@
         <%for(let row of result) { %>
         <div class="col mb-4">
           <div class="card">
-            <a href="course_details?coursenm=<%= row.coursenm %>&sunm=<%=sunm%>&ctatus=0">
+            <a style="text-decoration: none;color: black;"
+              href="course_details?coursenm=<%= row.coursenm %>&sunm=<%=sunm%>&ctatus=0">
               <% if (row.file1){ %>
               <img src="../images/courses/<%=row.file1 %>" class="bd-placeholder-img card-img-top" width="100%"
                 height="180" />
@@ -28,4 +29,5 @@
 </div>
 
 
+<% include script%>
 <% include footer %>

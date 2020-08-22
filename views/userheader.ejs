@@ -4,17 +4,15 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap" rel="stylesheet">
   <link href="images/iclogo3.png" rel="icon" />
-  <link rel="stylesheet" href="../stylesheets/style.css" />
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/style1.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap" rel="stylesheet">
   <title>iCoder - Heaven for Programmers</title>
 </head>
 
@@ -42,14 +40,20 @@
         </li>
         </li>
       </ul>
-      <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"
-            aria-hidden="true">&nbsp;<%= sunm %></i></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/user/user_setting">Change Password</a>
-          <a class="dropdown-item" href="/user/logout">logout</a>
-        </div>
+      <div class="mx-2">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href=""><i style=" font-size: 16px;
+              color: white;" class="fa fa-user" aria-hidden="true">&nbsp;<%= sunm %></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/user_setting"><i style="padding-right:10px; font-size: 16px;
+              color: white;" class="fa fa-cog" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-danger" href="/user/logout" style="color: white;">Logout</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

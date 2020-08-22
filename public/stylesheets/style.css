@@ -88,6 +88,13 @@
   width: 870px;
   margin: auto;
 }
+.card button {
+  font-family: serif;
+  color: #fff;
+  background-color: #ffb606;
+  border-color: #ffb606;
+  text-decoration: none;
+}
 .card-title {
   margin-bottom: 0.75rem;
 }
@@ -208,7 +215,7 @@ small {
 }
 .view-container {
   margin: 0px 80px;
-  border: 1px solid black;
+  border: 3px solid whitesmoke;
   padding: 28px 42px;
 }
 .view-nav-link {

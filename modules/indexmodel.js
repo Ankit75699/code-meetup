@@ -49,6 +49,39 @@ function indexModel() {
       })
     })
   }
+  this.checkemailaccount = (forgotemailDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("register").find({ 'email': forgotemailDetails }).toArray((err, data) => {
+        if (data.length == 0) {
+          resolve({ "msg": "Account Not Found" })
+        }
+        else {
+          if (err)
+            reject(err)
+          else {
+            resolve({ "msg": "Password reset link has been sent to your mail.Please click on the given link to change your forgotten password" })
+          }
+        }
+      })
+    })
+  }
+  this.resetPassword = (remail, rpassDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("register").find({ 'email': remail }).toArray((err, data) => {
+        if (rpassDetails.setnewpass != rpassDetails.cnewpass) {
+          resolve({ "msg": "New & confirm password not match" })
+        }
+        else {
+          db.collection("register").update({ 'email': remail }, { $set: { 'password': rpassDetails.setnewpass } }, (err) => {
+            if (err)
+              reject(err)
+            else
+              resolve({ 'msg': 'Password changed successfully' })
+          })
+        }
+      })
+    })
+  }
 
   this.login = (userDetails) => {
     return new Promise((resolve, reject) => {

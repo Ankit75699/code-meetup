@@ -1,4 +1,5 @@
 var express = require('express');
+var nodemailer = require('nodemailer');
 var indexModel = require('../modules/indexmodel')
 const url = require('url');
 const sendMail = require('./mailapi')
@@ -65,6 +66,51 @@ router.post('/login', function (req, res, next) {
       else
         res.redirect("/user")
     }
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/forgot_password', function (req, res, next) {
+  res.render('forgot_password', { "msg": "" });
+});
+router.post('/forgot_password', function (req, res, next) {
+  femail = req.body.femail
+  indexModel.checkemailaccount(femail).then((result) => {
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'rathoreankit607@gmail.com',
+        pass: 'Akku@kki0728'
+      }
+    });
+
+    var mailOptions = {
+      from: 'rathoreankit607@gmail.com',
+      to: femail,
+      subject: "Verification mail for reset password",
+      html: "<h1>Reset password...</h1><p>Click on the given link below to reset yor password</p><br>http://localhost:3000/reset_password?emailid=" + femail
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    res.render('forgot_password', { "msg": result.msg })
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/reset_password', function (req, res, next) {
+  res.render("reset_password", { "sunm": req.session.sunm, 'msg': '' })
+});
+router.post('/reset_password', function (req, res, next) {
+  var femail = url.parse(req.url, true).query.emailid
+  rpassDetails = req.body
+  indexModel.resetPassword(femail, rpassDetails).then((result) => {
+    res.render("reset_password", { "sunm": req.session.sunm, 'msg': result.msg })
   }).catch((err) => {
     console.log(err)
   })
