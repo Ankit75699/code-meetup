@@ -4,3 +4,17 @@
   integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
   integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script>
+  $(function () {
+    var selectedClass = "";
+    $(".filter").click(function () {
+      selectedClass = $(this).attr("data-rel");
+      $("#gallery").fadeTo(100, 0.1);
+      $("#gallery div").not("." + selectedClass).fadeOut().removeClass('animation');
+      setTimeout(function () {
+        $("." + selectedClass).fadeIn().addClass('animation');
+        $("#gallery").fadeTo(300, 1);
+      }, 300);
+    });
+  });
+</script>
