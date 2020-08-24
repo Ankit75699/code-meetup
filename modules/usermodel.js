@@ -11,6 +11,17 @@ function userModel() {
       })
     })
   }
+  this.fetchgalary = () => {
+    return new Promise((resolve, reject) => {
+      db.collection("add_galary").find().toArray((err, data) => {
+        if (err)
+          reject(err)
+        else
+          resolve(data)
+        console.log("data.............", data)
+      })
+    })
+  }
   this.fetchEvents = () => {
     return new Promise((resolve, reject) => {
       db.collection("events").find().toArray((err, data) => {
@@ -18,7 +29,6 @@ function userModel() {
           reject(err)
         else
           resolve(data)
-        console.log("data.............", data)
       })
     })
   }

@@ -220,23 +220,24 @@ small {
 }
 .view-nav-link {
   display: block;
-  padding: 1rem 78px;
+  padding: 20px;
 }
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
-  margin-top: -48px;
+  /* margin-top: -48px; */
   margin-bottom: -1px;
   border-radius: 0;
-  margin-right: 3px;
+  margin-right: 5px;
   border-top: 3px solid #ffb606;
   border-bottom: 0;
   font-size: 13px;
   font-weight: 700;
   background: #f9f9f9;
-  line-height: 29px;
+  /* line-height: 29px; */
   color: black;
   text-decoration: none;
+  width: 24%;
 }
 
 .wrapper {

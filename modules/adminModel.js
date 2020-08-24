@@ -64,6 +64,28 @@ function adminModel() {
 
     })
   }
+  this.Addgalary = (galaryDetails) => {
+    return new Promise((resolve, reject) => {
+      db.collection("add_galary").find().toArray((err, data) => {
+        if (data.length == 0)
+          galaryDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          galaryDetails._id = max_id + 1
+        }
+        db.collection("add_galary").insert(galaryDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve(true)
+        })
+      })
+    })
+  }
   this.Addevents = (eventsDetails) => {
     return new Promise((resolve, reject) => {
       db.collection("events").find().toArray((err, data) => {

@@ -66,7 +66,11 @@ router.get('/course_details', function (req, res, next) {
   })
 });
 router.get('/user_galary', function (req, res, next) {
-  res.render("user_galary", { "sunm": req.session.sunm })
+  userModel.fetchgalary().then((result) => {
+    res.render("user_galary", { "result": result, "sunm": req.session.sunm })
+  }).catch((err) => {
+    console.log(err)
+  })
 });
 router.get('/usercourses', function (req, res, next) {
   userModel.CourseDetails().then((result) => {

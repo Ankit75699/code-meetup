@@ -54,8 +54,22 @@ router.post('/blog', function (req, res, next) {
     console.log(err)
   })
 });
-router.get('/addimages', function (req, res, next) {
+router.get('/addgalary', function (req, res, next) {
   res.render('addimages', { "msg": "", "sunm": req.session.sunm });
+});
+router.post('/addgalary', function (req, res, next) {
+  galaryDetails = req.body
+  var galaryimg = req.files.galaryimg;
+  var galaryimgnm = Date.now() + "-" + galaryimg.name;
+  var galaryimgpath = path.join(__dirname, "../public/images/galary", galaryimgnm);
+  galaryimg.mv(galaryimgpath);
+  galaryDetails.galaryimg = galaryimgnm
+  galaryDetails.info = Date()
+  adminModel.Addgalary(galaryDetails).then((result) => {
+    res.render('addimages', { "msg": "galary added successfully", "sunm": req.session.sunm });
+  }).catch((err) => {
+    console.log(err)
+  })
 });
 router.get('/addevents', function (req, res, next) {
   res.render('addevents', { "msg": "", "sunm": req.session.sunm });
