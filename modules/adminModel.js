@@ -8,7 +8,6 @@ function adminModel() {
           reject(err)
         else
           resolve(data)
-        console.log("data.......", data)
       })
     })
   }
@@ -174,6 +173,16 @@ function adminModel() {
       })
     })
   }
-
+  this.fetch_Visitorquery = () => {
+    return new Promise((resolve, reject) => {
+      db.collection('Contact_us').find({}).toArray((err, data) => {
+        if (err)
+          reject(err)
+        else
+          resolve(data)
+        console.log("data.......", data)
+      })
+    })
+  }
 }
 module.exports = new adminModel()

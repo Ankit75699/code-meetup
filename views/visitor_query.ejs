@@ -1,0 +1,40 @@
+<% include adminheader %>
+<div class="container my-4">
+  <center>
+    <div class="table-responsive">
+      <h1>View Visitor Query Here</h1>
+      <table class="table table-responsive my-4">
+        <thead class="thead-dark">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <th>Course Name</th>
+            <th>He Is</th>
+            <th>About</th>
+            <th>Concern</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <% for(row of result) { %>
+          <tr>
+            <td><%= row._id %></td>
+            <td><%= row.name %></td>
+            <td><%= row.email %></td>
+            <td><%= row.mobile %></td>
+            <td><%= row.courseList%></td>
+            <td><%= row.are_you%></td>
+            <td><%= row.about %></td>
+            <td><%= row.concern %></td>
+
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </center>
+</div>
+<% include script%>
+<% include footer %>

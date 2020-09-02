@@ -1,6 +1,30 @@
 const db = require('./connection')
+
 const { collection, getMaxListeners } = require('./connection')
 function indexModel() {
+  this.userQuery = (contactDetails) => {
+    console.log("indexmodel2222", contactDetails)
+    return new Promise((resolve, reject) => {
+      db.collection("Contact_us").find().toArray((err, data) => {
+        if (data.length == 0)
+          contactDetails._id = 1
+        else {
+          max_id = data[0]._id
+          for (row of data) {
+            if (max_id < row._id)
+              max_id = row._id
+          }
+          contactDetails._id = max_id + 1
+        }
+        db.collection("Contact_us").insert(contactDetails, (err) => {
+          if (err)
+            reject(err)
+          else
+            resolve(true)
+        })
+      })
+    })
+  }
   this.registration = (userDetails) => {
     return new Promise((resolve, reject) => {
       db.collection("register").find({}).toArray((err, data) => {

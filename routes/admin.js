@@ -35,7 +35,11 @@ router.use("/add_index", (req, res, next) => {
 
 /* GET adminhome page. */
 router.get('/', function (req, res, next) {
-  res.render('adminhome', { "msg": "", "sunm": req.session.sunm });
+  adminModel.fetchAll().then((result) => {
+    res.render('adminhome', { result: result, "sunm": req.session.sunm });
+  }).catch((err) => {
+    console.log(err)
+  })
 });
 router.get('/blog', function (req, res, next) {
   res.render('addblog', { "msg": "", "sunm": req.session.sunm });
@@ -89,13 +93,6 @@ router.post('/addevents', function (req, res, next) {
   })
 });
 
-router.get('/manageuser', function (req, res, next) {
-  adminModel.fetchAll().then((result) => {
-    res.render('manageuser', { result: result, "sunm": req.session.sunm });
-  }).catch((err) => {
-    console.log(err)
-  })
-});
 router.get('/manageuserstatus', function (req, res, next) {
   var statusDetails = url.parse(req.url, true).query;
   adminModel.manageuserstatus(statusDetails).then((result) => {
@@ -159,6 +156,13 @@ router.get('/setting', function (req, res, next) {
 router.post('/setting', function (req, res, next) {
   userModel.chngPassword(req.session.email, req.body).then((result) => {
     res.render("setting", { "sunm": req.session.sunm, 'msg': result.msg })
+  }).catch((err) => {
+    console.log(err)
+  })
+});
+router.get('/visitor_query', function (req, res, next) {
+  adminModel.fetch_Visitorquery().then((result) => {
+    res.render('visitor_query', { result: result, "sunm": req.session.sunm });
   }).catch((err) => {
     console.log(err)
   })

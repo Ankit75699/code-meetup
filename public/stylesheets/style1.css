@@ -8,8 +8,9 @@
 
 .star-container {
   position: relative;
-  width: 400px;
-  background: #fff;
+  height: 333px;
+  margin-top: 40px;
+  background: #111;
   padding: 20px 30px;
   border: 1px solid #444;
   border-radius: 5px;
@@ -17,6 +18,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 98%;
 }
 .star-container .s-post {
   display: none;

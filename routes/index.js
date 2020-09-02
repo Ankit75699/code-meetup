@@ -1,6 +1,7 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
 var indexModel = require('../modules/indexmodel')
+var userModel = require('../modules/usermodel');
 const url = require('url');
 const sendMail = require('./mailapi')
 const sendSMS = require('./smsapi')
@@ -15,7 +16,15 @@ router.use("/login", (req, res, next) => {
   }
   next();
 });
-
+/* Middleware to fetch courselist. */
+router.use("/contact", (req, res, next) => {
+  userModel.CourseDetails().then((result) => {
+    courseList = result
+    next();
+  }).catch((err) => {
+    console.log(err)
+  })
+})
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { "msg": "" });
@@ -50,6 +59,7 @@ router.post('/login', function (req, res, next) {
     if (result.length == 0)
       res.render('login', { 'msg': 'Invalid user please login again or verify account....', 'cunm': cunm, 'cpass': cpass });
     else {
+      req.session.s_id = result[0]._id
       req.session.sunm = result[0].name
       req.session.email = result[0].email
       req.session.srole = result[0].role
@@ -124,7 +134,17 @@ router.get('/courses', function (req, res, next) {
 });
 
 router.get('/contact', function (req, res, next) {
-  res.render('contact');
+  res.render('contact', { "msg": "", "courseList": courseList });
+});
+router.post('/contact', function (req, res, next) {
+  contactDetails = req.body
+  contactDetails.info = Date()
+  indexModel.userQuery(contactDetails).then((result) => {
+    console.log(contactDetails)
+    res.render('contact', { msg: "we contact you soon", "courseList": courseList });
+  }).catch((err) => {
+    console.log(err)
+  })
 });
 router.get('/logout', function (req, res, next) {
   req.session.destroy()

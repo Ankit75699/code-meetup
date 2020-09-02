@@ -2,7 +2,6 @@
 <% result.forEach(function(row,index=1) { %>
 <% if (index%2==0) { %>
 <section class="section">
-
   <div class="paras">
     <p class="sectionTag big-text"><%=row.Title%></p>
     <p class="sectionSubTag small-text"><%=row.text%></p>
@@ -10,7 +9,7 @@
   </div>
   <div class="thumbnail">
     <% if (row.file3){ %>
-    <img src="../images/blog/<%=row.file3%>" alt="Blog image" class="imgFluid">
+    <img style="height: 228px;" src="../images/blog/<%=row.file3%>" alt="Blog image" class="imgFluid">
     <% } %>
   </div>
 </section>
@@ -20,11 +19,11 @@
   <div class="paras">
     <p class="sectionTag big-text"><%=row.Title%></p>
     <p class="sectionSubTag small-text"><%=row.text%></p>
-    <small class="small-text"><%=row.bdate%></small>
+    <small class="small-text">On&nbsp;<%=row.bdate%>&nbsp;By&nbsp;<%=row.ubname%></small>
   </div>
   <div class="thumbnail">
     <% if (row.file3){ %>
-    <img src="../images/blog/<%=row.file3%>" alt="Blog image" class="imgFluid">
+    <img style="height: 228px;" src="../images/blog/<%=row.file3%>" alt="Blog image" class="imgFluid">
     <% } %>
   </div>
 </section>

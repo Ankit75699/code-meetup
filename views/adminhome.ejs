@@ -1,4 +1,53 @@
 <% include adminheader %>
-<h1> welcome to iCoder admin page</h1>
+<div class="container my-4">
+  <center>
+    <div class="table-responsive">
+      <h1>View & Manage Users Here</h1>
+      <table class="table table-responsive my-4">
+        <thead class="thead-dark">
+          <tr>
+            <th>Id</th>
+            <th>Nmae</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Gender</th>
+            <th>Role</th>
+            <th>Info</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(row of result) { %>
+          <tr>
+            <td><%= row._id %></td>
+            <td><%= row.name %></td>
+            <td><%= row.email %></td>
+            <td><%= row.mobile %></td>
+            <td><%= row.gender %></td>
+            <td><%= row.role %></td>
+            <td><%= row.info %></td>
+            <% if(row.status) { %>
+            <td>
+              <a href="/admin/manageuserstatus?s=block&regid=<%= row._id %>" class="site-btn btn btn-danger">Block</a>
+            </td>
+            <% } else { %>
+            <td>
+              <a href="/admin/manageuserstatus?s=unblock&regid=<%= row._id %>"
+                class="site-btn btn btn-success">Unblock</a>
+            </td>
+            <% } %>
+            <td>
+              <a href="/admin/manageuserstatus?s=delete&regid=<%= row._id %>"
+                class="site-btn btn btn-primary">Delete</a>
+            </td>
+
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </center>
+</div>
 <% include script%>
-<% include footer%>
+<% include footer %>

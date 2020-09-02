@@ -25,7 +25,7 @@
       <div class="tab-content" id="nav-tabContent">
         <%for(row of result) { %>
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <h5 class="view-big-text my-4">It’s time to learn React.js</h5>
+          <h5 class="view-big-text my-4">It’s time to learn <%- row.courseList%></h5>
           <p class="view-small-text"><%- row.Description%></p>
           <h5 class="view-big-text">Learning Outcomes</h5>
           <p class="view-small-text"><%- row.Learning %></p>
@@ -43,8 +43,8 @@
             <div class="card mb-2">
               <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
-                  <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne_<%=index%>"
-                    aria-expanded="true" aria-controls="collapseOne">
+                  <button class="btn" style="width: 20%;" type="button" data-toggle="collapse"
+                    data-target="#collapseOne_<%=index%>" aria-expanded="true" aria-controls="collapseOne">
                     <%- row.subCourse %></button>
                 </h2>
               </div>
@@ -53,8 +53,32 @@
                 data-parent="#accordionExample">
                 <div class="card-body">
                   <%- row.Description %>
-                  <%if(row.cstatus) { %>
-                  <a class="btn btn-primary disabled " href="<%= row.Link %>">Subscribe first to get a fullcourse</a>
+
+                  <%if(cstatus==0) { %>
+                  <a class="btn btn-primary disabled" href="<%= row.Link %>">Subscribe first to get a fullcourse</a>
+                  <!-- PayPal payment form for displaying the buy button -->
+                  <form action="<%= PAYPAL_URL %>" method="post">
+                    <!-- Identify your business so that you can collect the payments. -->
+                    <input type="hidden" name="business" value="<%= PAYPAL_ID %>">
+
+                    <!-- Specify a Buy Now button. -->
+                    <input type="hidden" name="cmd" value="_xclick">
+
+                    <!-- Specify details about the item that buyers will purchase. -->
+                    <input type="hidden" name="item_name" value="Verify payment status">
+                    <input type="hidden" name="item_number" value="<%=row.courseList%>">
+                    <input type="hidden" name="amount" value="10">
+                    <input type="hidden" name="currency_code" value="USD">
+
+                    <!-- Specify URLs -->
+                    <input type="hidden" name="return"
+                      value="http://localhost:3000/user/payment?coursenm=<%= row.courseList %>&s_id=<%=s_id%>&price=10">
+                    <input type="hidden" name="cancel_return" value="http://localhost:3000/user/cancel/">
+
+                    <!-- Display the payment button. -->
+                    <input type="image" name="submit" border="0" style="float: right;"
+                      src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
+                  </form>
                   <% } else { %>
                   <a class="btn btn-primary " href="<%= row.Link %>">View Courses</a>
                   <% } %>
@@ -64,34 +88,8 @@
             <% }) %>
           </div>
 
-          <!-- PayPal payment form for displaying the buy button -->
-          <form action="<%= PAYPAL_URL %>" method="post">
-            <!-- Identify your business so that you can collect the payments. -->
-            <input type="hidden" name="business" value="<%= PAYPAL_ID %>">
 
-            <!-- Specify a Buy Now button. -->
-            <input type="hidden" name="cmd" value="_xclick">
 
-            <!-- Specify details about the item that buyers will purchase. -->
-            <input type="hidden" name="item_name" value="Verify Location Charges">
-            <input type="hidden" name="item_number" value="<%=courseList%>">
-            <input type="hidden" name="amount" value="50">
-            <input type="hidden" name="currency_code" value="USD">
-
-            <!-- Specify URLs -->
-            <input type="hidden" name="return"
-              value="http://localhost:3000/user/payment?coursename=<%=courseList%>&sunm=<%= sunm %>&price=50"">
-            <input type=" hidden" name="cancel_return" value="http://localhost:3000/user/cancel/">
-
-            <!-- Display the payment button. -->
-            <input type="image" name="submit" border="0" style="float: right;"
-              src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
-          </form>
-          <form action="/change_course_status" id="hiddenform">
-            <input type="hidden" name="course_id" id="" value="<>">
-            <input type="hidden" name="user_id" id="">
-            <input type="hidden" name="payment_status" id="">
-          </form>
         </div>
         <div class="tab-pane fade" id="nav-instructor" role="tabpanel" aria-labelledby="nav-contact-tab">hello
           Instructor
@@ -118,12 +116,13 @@
               <form action="#">
                 <header></header>
                 <div class="textarea">
-                  <textare cols="30" placeholder="Describe your experience.."></textare>
-                  <br />
-                  <div class="btn">
-                    <button type="submit">Post</button>
-                  </div>
+                  <textarea cols="30" placeholder="Describe your experience.." name="textarea"></textarea>
                 </div>
+                <br />
+                <div class="btn">
+                  <button type="submit">Post</button>
+                </div>
+
               </form>
             </div>
           </div>
@@ -132,7 +131,6 @@
     </div>
   </div>
 </div>
-
 <% include footer%>
 <%include script%>
 <script>
