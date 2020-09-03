@@ -96,7 +96,7 @@ router.post('/addevents', function (req, res, next) {
 router.get('/manageuserstatus', function (req, res, next) {
   var statusDetails = url.parse(req.url, true).query;
   adminModel.manageuserstatus(statusDetails).then((result) => {
-    res.redirect("/admin/manageuser");
+    res.redirect("/admin");
   }).catch((err) => {
     console.log(err)
   })
