@@ -109,6 +109,7 @@
   justify-content: space-evenly;
   max-width: 85%;
   margin: auto;
+  margin-bottom: 25px;
 }
 .paras {
   padding: 0px 54px;
