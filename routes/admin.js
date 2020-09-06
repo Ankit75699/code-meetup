@@ -87,7 +87,7 @@ router.post('/addevents', function (req, res, next) {
   eventsDetails.file2 = file2nm
   eventsDetails.info = Date()
   adminModel.Addevents(eventsDetails).then((result) => {
-    res.render('addevents', { "msg": "", "sunm": req.session.sunm, result });
+    res.render('addevents', result);
   }).catch((err) => {
     console.log(err)
   })
