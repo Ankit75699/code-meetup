@@ -56,7 +56,7 @@ function indexModel() {
             if (err)
               reject(err)
             else
-              resolve({ 'msg': 'Record inserted successfully' })
+              resolve({ 'msg': 'Registration successfull verifycation is sent to your mail please click on the given link to verify yourself' })
           })
         }
       })
