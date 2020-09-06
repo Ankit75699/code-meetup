@@ -72,8 +72,9 @@
 
                     <!-- Specify URLs -->
                     <input type="hidden" name="return"
-                      value="http://localhost:3000/user/payment?coursenm=<%= row.courseList %>&s_id=<%=s_id%>&price=10">
-                    <input type="hidden" name="cancel_return" value="http://localhost:3000/user/cancel/">
+                      value="https://icoder-heaven-for-programmers.herokuapp.com/user/payment?coursenm=<%= row.courseList %>&s_id=<%=s_id%>&price=10">
+                    <input type="hidden" name="cancel_return"
+                      value="https://icoder-heaven-for-programmers.herokuapp.com/user/cancel/">
 
                     <!-- Display the payment button. -->
                     <input type="image" name="submit" border="0" style="float: right;"

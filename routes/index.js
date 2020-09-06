@@ -90,7 +90,7 @@ router.post('/forgot_password', function (req, res, next) {
       service: 'gmail',
       auth: {
         user: 'rathoreankit607@gmail.com',
-        pass: 'Akku@kki0728'
+        pass: 'aKku@jsr0207'
       }
     });
 
@@ -98,7 +98,7 @@ router.post('/forgot_password', function (req, res, next) {
       from: 'rathoreankit607@gmail.com',
       to: femail,
       subject: "Verification mail for reset password",
-      html: "<h1>Reset password...</h1><p>Click on the given link below to reset yor password</p><br>http://localhost:3000/reset_password?emailid=" + femail
+      html: "<h1>Reset password...</h1><p>Click on the given link below to reset yor password</p><br>https://icoder-heaven-for-programmers.herokuapp.com/reset_password?emailid=" + femail
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
